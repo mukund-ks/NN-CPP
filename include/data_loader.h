@@ -7,8 +7,8 @@ typedef std::vector<std::pair<cv::Mat, std::vector<int>>> Set;
 
 class Dataset {
    private:
-    std::vector<cv::Mat> image;
-    std::vector<int> label;
+    cv::Mat image;
+    int label;
 
     Set trainingSet;
     Set validationSet;
