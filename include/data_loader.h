@@ -4,32 +4,29 @@
 #include <utility>
 #include <vector>
 
-typedef std::vector<std::pair<Eigen::MatrixXf, std::vector<int>>> Set;
+typedef std::vector<std::pair<Eigen::RowVectorXf, std::vector<int>>> Set;
 typedef Eigen::MatrixXf Matrix;
+typedef Eigen::RowVectorXf RowMatrix;
 typedef cv::Mat cvImg;
 
 class Dataset {
    private:
-    cvImg image;
-    int label;
-
+    Set data;
     Set trainingSet;
     Set validationSet;
     Set testingSet;
 
+    std::string dataDir;
     int numClasses;
-    int trainSize;
-    int validationSize;
-    int testSize;
 
-    void loadData(const std::string& dataDir);
+    void loadData();
     void createSplits();
     void shuffleDataset();
-    Matrix getEigenImage(cvImg image);
-    std::vector<int> oneHotEncode(int label);
+    void getEigenImage(const cvImg& image, RowMatrix& result);
+    void oneHotEncode(const int& classId, std::vector<int>& labelVec);
 
    public:
-    Dataset(const std::string& dataDir, int numClasses, int trainSize, int validationSize, int testSize);
+    Dataset(std::string dataDir, int numClasses);
     void prepareDataset();
     const Set& getTrainingSet() const;
     const Set& getValidationSet() const;
