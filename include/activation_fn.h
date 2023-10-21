@@ -1,28 +1,28 @@
 #pragma once
 #include <Eigen/Dense>
 
-typedef Eigen::MatrixXf Matrix;
+typedef Eigen::RowVectorXf RowMatrix;
 
 class ActivationFunction {
    public:
-    virtual Matrix activate(const Matrix &input) const = 0;
-    virtual Matrix gradient(const Matrix &output) const = 0;
+    virtual RowMatrix activate(const RowMatrix &input) const = 0;
+    virtual RowMatrix gradient(const RowMatrix &input) const = 0;
 };
 
 class SigmoidActivation : public ActivationFunction {
    public:
-    Matrix activate(const Matrix &input) const override;
-    Matrix gradient(const Matrix &output) const override;
+    RowMatrix activate(const RowMatrix &input) const override;
+    RowMatrix gradient(const RowMatrix &input) const override;
 };
 
 class ReLUActivation : public ActivationFunction {
    public:
-    Matrix activate(const Matrix &input) const override;
-    Matrix gradient(const Matrix &output) const override;
+    RowMatrix activate(const RowMatrix &input) const override;
+    RowMatrix gradient(const RowMatrix &input) const override;
 };
 
 class LinearActivation : public ActivationFunction {
    public:
-    Matrix activate(const Matrix &input) const override;
-    Matrix gradient(const Matrix &output) const override;
+    RowMatrix activate(const RowMatrix &input) const override;
+    RowMatrix gradient(const RowMatrix &input) const override;
 };
