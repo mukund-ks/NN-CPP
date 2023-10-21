@@ -7,6 +7,7 @@
 #include "optimizers.h"
 
 typedef Eigen::MatrixXf Matrix;
+typedef std::vector<std::pair<Eigen::MatrixXf, std::vector<int>>> Set;
 
 class NeuralNetwork {
    private:
@@ -17,9 +18,9 @@ class NeuralNetwork {
    public:
     NeuralNetwork(Loss *lossFunction, AdamOptimizer optimizer);
     void addLayer(Layer *layer);
-    void train(const Matrix &input, const Matrix &target, int epochs);
-    Matrix validate(const Matrix &input, const Matrix &target);
-    Matrix test(const Matrix &input);
+    void train(const Set &dataset, int epochs);
+    Matrix validate(const Set &dataset);
+    Matrix test(const Set &dataset);
     void save(const std::string &filename);
     void load(const std::string &filename);
 };

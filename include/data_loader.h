@@ -1,13 +1,16 @@
 #pragma once
-#include <opencv4/opencv2/opencv.hpp>
+#include <Eigen/Dense>
+#include <opencv2/opencv.hpp>
 #include <utility>
 #include <vector>
 
-typedef std::vector<std::pair<cv::Mat, std::vector<int>>> Set;
+typedef std::vector<std::pair<Eigen::MatrixXf, std::vector<int>>> Set;
+typedef Eigen::MatrixXf Matrix;
+typedef cv::Mat cvImg;
 
 class Dataset {
    private:
-    cv::Mat image;
+    cvImg image;
     int label;
 
     Set trainingSet;
@@ -22,6 +25,7 @@ class Dataset {
     void loadData(const std::string& dataDir);
     void createSplits();
     void shuffleDataset();
+    Matrix getEigenImage(cvImg image);
     std::vector<int> oneHotEncode(int label);
 
    public:
